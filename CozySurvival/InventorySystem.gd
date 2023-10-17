@@ -1,9 +1,10 @@
 extends Node2D
 class Item:
-	func _init(stacksize):
+	func _init(stacksize, Type):
 		self.stacksize = stacksize
+		self.Type = Type
 var InventoryOpen = false
-var Empty = Item.new(0)
+var Empty = Item.new(0,"empty")
 var PassPoint 
 var Inventory = [Empty,Empty,Empty,Empty,Empty]
 var InHand
@@ -38,3 +39,31 @@ func _on_Button5_pressed():
 		Item_Switch(4)
 	else:
 		Selected = 4
+		
+#detects wether or not the mouse is on one of the inventory buttons.
+var OnButton = false
+
+func _on_Button_mouse_entered():
+	OnButton = true
+func _on_Button2_mouse_entered():
+	OnButton = true
+func _on_Button3_mouse_entered():
+	OnButton = true
+func _on_Button4_mouse_entered():
+	OnButton = true
+func _on_Button5_mouse_entered():
+	OnButton = true
+
+func _on_Button_mouse_exited():
+	OnButton = false
+func _on_Button2_mouse_exited():
+	OnButton = false
+func _on_Button3_mouse_exited():
+	OnButton = false
+func _on_Button4_mouse_exited():
+	OnButton = false
+func _on_Button5_mouse_exited():
+	OnButton = false
+	
+#do thing when button clicked. 
+
