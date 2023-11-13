@@ -4,15 +4,27 @@ class Item:
 		self.stacksize = stacksize
 		self.Type = Type
 var InventoryOpen = false
-var Empty = Item.new(0,"empty")
 var PassPoint 
-var Inventory = [Empty,Empty,Empty,Empty,Empty]
+var Inventory = [null,null,null,null,null]
 var InHand
 var Selected
+var SlotNotFound
+signal IiemUsed(count, number)
 func Item_Switch(slot):
 	PassPoint = Inventory[slot]
 	Inventory[slot] = InHand
 	InHand = PassPoint
+
+func AddItem(name, count):
+	for item in Inventory:
+		if item != null and item.Type == name:
+			item.stacksize += count
+			return true
+	if Inventory.has(null):
+		Inventory[Inventory.find(null)] = Item.new(count, name)
+		return true
+	return false
+		
 
 func _on_Button_pressed():
 	if(InventoryOpen):
