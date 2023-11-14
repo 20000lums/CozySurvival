@@ -9,7 +9,6 @@ var Inventory = [null,null,null,null,null]
 var InHand
 var Selected
 var SlotNotFound
-signal IiemUsed(count, number)
 func Item_Switch(slot):
 	PassPoint = Inventory[slot]
 	Inventory[slot] = InHand
@@ -25,7 +24,10 @@ func AddItem(name, count):
 		return true
 	return false
 		
-
+func process(delta):
+	if Input.is_action_just_pressed("left click"):
+		get_parent().ItemUsed(Inventory[Selected].Type, Inventory[Selected].stacksize)
+	pass
 func _on_Button_pressed():
 	if(InventoryOpen):
 		Item_Switch(0)
