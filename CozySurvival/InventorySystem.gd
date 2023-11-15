@@ -14,6 +14,23 @@ func Item_Switch(slot):
 	Inventory[slot] = InHand
 	InHand = PassPoint
 
+
+
+func UpdateVisuals():
+	$Button.Text = Inventory[0].Type + Inventory[0].stacksize
+	$Button2.Text = Inventory[1].Type + Inventory[1].stacksize
+	$Button3.Text = Inventory[2].Type + Inventory[2].stacksize
+	$Button4.Text = Inventory[3].Type + Inventory[3].stacksize
+	$Button5.Text = Inventory[4].Type + Inventory[4].stacksize
+	pass
+
+func _input(event):
+	if event.is_action_pressed("jump"):
+		if InventoryOpen:
+			InventoryOpen = false
+		else:
+			InventoryOpen = true
+
 func AddItem(name, count):
 	for item in Inventory:
 		if item != null and item.Type == name:
@@ -23,9 +40,9 @@ func AddItem(name, count):
 		Inventory[Inventory.find(null)] = Item.new(count, name)
 		return true
 	return false
-		
+
 func process(delta):
-	if Input.is_action_just_pressed("left click"):
+	if Input.is_action_just_pressed("left click") && !OnButton:
 		get_parent().ItemUsed(Inventory[Selected].Type, Inventory[Selected].stacksize)
 	pass
 func _on_Button_pressed():
