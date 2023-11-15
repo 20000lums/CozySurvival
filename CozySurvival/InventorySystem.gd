@@ -25,7 +25,7 @@ func UpdateVisuals():
 	pass
 
 func _input(event):
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("inv"):
 		if InventoryOpen:
 			InventoryOpen = false
 		else:
@@ -41,7 +41,7 @@ func AddItem(name, count):
 		return true
 	return false
 
-func process(delta):
+func process(_delta):
 	if Input.is_action_just_pressed("left click") && !OnButton:
 		get_parent().ItemUsed(Inventory[Selected].Type, Inventory[Selected].stacksize)
 	pass
@@ -55,11 +55,7 @@ func _on_Button2_pressed():
 		Item_Switch(1)
 	else:
 		Selected = 1
-func _on_Button3_pressed():
-	if(InventoryOpen):
-		Item_Switch(2)
-	else:
-		Selected = 2
+	
 func _on_Button4_pressed():
 	if(InventoryOpen):
 		Item_Switch(3)
@@ -98,3 +94,10 @@ func _on_Button5_mouse_exited():
 	
 #do thing when button clicked. 
 
+
+
+func _on_Button3_button_down():
+	if(InventoryOpen):
+		Item_Switch(2)
+	else:
+		Selected = 2
